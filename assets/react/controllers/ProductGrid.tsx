@@ -1,11 +1,15 @@
 import React from "react";
 import { Box, Button, Grid, Paper, Stack, Typography } from "@mui/material";
-import useProducts from "../hooks/useProducts";
+import useProducts, { Product } from "../hooks/useProducts";
 import { formatPrice } from "../../utils";
 import { ShoppingCart } from "@mui/icons-material";
-export default function ProductGrid() {
+export default function ProductGrid({addItemToShoppingCart , shoppingCart}) {
     const products = useProducts();
-    
+    const handleProductLabel = (product: Product ) => {
+        const productInShoppingCart = shoppingCart?.items?.find(item => item.product.id === product.id);
+    return productInShoppingCart ? `Vous en avez déjà ajouté ${productInShoppingCart.quantity } ` : 'Ajouter au panier';
+    }
+
     return (
         <Grid container marginTop={5} justifyContent="space-evenly" alignItems="center">   
                 {products?.map((product) => (
@@ -27,8 +31,9 @@ export default function ProductGrid() {
                                 variant="outlined" 
                                 color="primary"
                                 endIcon={<ShoppingCart/>}
+                                onClick={()=>addItemToShoppingCart(product)}
                                 >
-                                    Ajouter au panier
+                                   {handleProductLabel(product)} 
                                 </Button>
                                 </Stack>
                             </Paper>    

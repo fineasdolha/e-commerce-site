@@ -3,7 +3,7 @@ import { AppBar, Toolbar, Grid, IconButton, Badge } from "@mui/material";
 import { visit } from "../../utils";
 import React from "react";
 
-export default function Header() {
+export default function Header({shoppingCart}) {
     const showHome = () : void => {
         visit('/');
     }
