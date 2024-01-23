@@ -26,6 +26,12 @@ class SessionService
         return $this->getSession()->get(self::SHOPPING_CART, new ShoppingCart());
     }
 
+    public function emptyShoppingCart()
+    {
+        return $this->getSession()->set(self::SHOPPING_CART, new ShoppingCart());
+    }
+
+
     public function addItemToShoppingCart(Product $product)
     {
         $shoppingCart = $this->getShoppingCart();

@@ -8,6 +8,7 @@ use App\Service\SessionService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class SessionController extends AbstractController
 {
@@ -37,5 +38,12 @@ class SessionController extends AbstractController
         $this->sessionService->removeItemFromShoppingCart($product);
         }
         return $this->json($this->sessionService->getShoppingCart());
+    }
+
+    #[Route('/session/empty-shopping-cart/', name: 'session_empty_shopping_cart', methods:'DELETE')]
+    public function emptyShopppingCart(): Response
+    {
+         $this->sessionService->emptyShoppingCart();
+         return $this->json($this->sessionService->getShoppingCart());
     }
 }

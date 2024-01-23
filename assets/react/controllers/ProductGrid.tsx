@@ -7,7 +7,7 @@ export default function ProductGrid({addItemToShoppingCart , shoppingCart}) {
     const products = useProducts();
     const handleProductLabel = (product: Product ) => {
         const productInShoppingCart = shoppingCart?.items?.find(item => item.product.id === product.id);
-    return productInShoppingCart ? `Vous en avez déjà ajouté ${productInShoppingCart.quantity } ` : 'Ajouter au panier';
+    return productInShoppingCart ? `Vous en avez ajouté ${productInShoppingCart.quantity } ` : 'Ajouter au panier';
     }
 
     return (

@@ -40,7 +40,20 @@ export default function useProducts() {
             .finally(() => {
                 setLoading(false);
     });
-    }  
+
+    }
+    
+    const emptyShoppingCart = () => {
+        setLoading(true);
+        fetch('/session/empty-shopping-cart/', {
+            method: 'DELETE'
+        })
+            .then(response  => response.json())
+            .then(json => setShoppingCart(json))
+            .finally(() => {
+                setLoading(false);
+    });
+    }
     
     useEffect( () : void => {
         setLoading(true);
@@ -55,6 +68,7 @@ export default function useProducts() {
     return {
         addItemToShoppingCart,
         removeItemFromShoppingCart,
+        emptyShoppingCart,
         shoppingCart,
         loading
     };
