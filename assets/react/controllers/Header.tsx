@@ -1,5 +1,5 @@
 import { ShoppingCart, StoreMallDirectory } from "@mui/icons-material";
-import { AppBar, Toolbar, Grid, IconButton, Badge } from "@mui/material";
+import { AppBar, Toolbar, Grid, IconButton, Badge, ListItem } from "@mui/material";
 import { visit } from "../../utils";
 import React from "react";
 
@@ -10,6 +10,10 @@ export default function Header({shoppingCart}) {
 
     const showShoppingCart = () : void => {
         visit('/shopping-cart');
+    }
+
+    const calculateTotalQuantity = () => {
+        return shoppingCart?.items?.map((item) => item.quantity).reduce((a,b) => a+b,0);
     }
     return (
         <>
@@ -23,7 +27,7 @@ export default function Header({shoppingCart}) {
                             </Grid>
                             <Grid item>
                             <IconButton color="inherit" onClick={showShoppingCart}>
-                                    <Badge badgeContent={1} color="secondary">
+                                    <Badge badgeContent={calculateTotalQuantity()} color="secondary">
                                         <ShoppingCart />
                                     </Badge>           
                             </IconButton>
